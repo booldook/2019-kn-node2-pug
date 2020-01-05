@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const host = '127.0.0.1';
-const { mysql, conn } = require('./modules/mysql-conn');
+const { pool, sqlErr } = require('./modules/mysql-conn');
 
 app.listen(port, () => {
 	console.log(`http://${host}:${port}`);
@@ -37,9 +37,9 @@ app.get(["/pug", "/pug/:page"], (req, res) => {
 			break;
 	}
 });
-
+/*
 app.get("/sqltest", (req, res) => {
-	conn.getConnection((err, connect) => {
+	let connect = conn.getConnection((err, connect) => {
 		if(err) {
 			res.send("Database 접속에 실패하였습니다.");
 		}
@@ -55,4 +55,15 @@ app.get("/sqltest", (req, res) => {
 			});
 		}
 	});
+	console.log(connect);
+});
+*/
+
+app.get("/sqltest", async (req, res) => {
+	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?";
+	let sqlVals = ["제목입니다2.", "관리자2", "2020-01-05 15:55:00"];
+	const connect = await pool.getConnection();
+	const result = await connect.query(sql, sqlVals);
+	connect.release();
+	res.json(result);
 });
