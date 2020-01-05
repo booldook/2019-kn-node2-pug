@@ -1,13 +1,13 @@
 extends ./layout/board.pug
 block title
-	div.jumbotron
+	.jumbotron.my-2
 		h2= title
-			small - 게시판 리스트
+			small - 게시글 작성 입니다.
 block content
-	.write-wrap
+	form(action="/board" method="post" name="writeForm")
 		table.table.table-bordered
 			tbody
 				tr
 					td 작성자
 					td
-						input.form-control(type="text" name="writer")
+						input.formn-control(type="text" name="writer" placeholder="작성자")

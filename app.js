@@ -20,6 +20,11 @@ app.get(["/pug", "/pug/:page"], (req, res) => {
 	switch(page) {
 		case "list":
 			vals.title = "게시글 리스트 입니다.";
+			vals.lists = [
+				{id:1, title: "첫번째 글", writer: "관리자", wdate: "2020-01-03", rnum: 5},
+				{id:2, title: "두번째 글", writer: "관리자2", wdate: "2020-01-04", rnum: 6},
+				{id:3, title: "세번째 글", writer: "관리자3", wdate: "2020-01-05", rnum: 4},
+			];
 			res.render("list.pug", vals);
 			break;
 		case "write":
