@@ -1,0 +1,17 @@
+extends ./layout/board.pug
+block title
+	div.jumbotron
+		h2= title
+			small - 게시판 리스트
+block content
+	.list-wrap
+		table.table.table-bordered
+			thead
+				tr
+					th 번호
+					th 제목
+					th 작성자
+					th 작성일
+					th 조회수
+			tbody
+					
