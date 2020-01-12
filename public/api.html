@@ -14,6 +14,24 @@
 		<div class="jumbotron">
 			<h2 id="title"></h2>
 		</div>
+		<form name="form1" class="border border-secondary p-2">
+			<input type="hidden" name="id" value="">
+			<div class="py-2 form-inline">
+				<span class="d-inline-block" style="width: 100px;">작성자: </span>
+				<input type="text" name="writer" class="form-control">
+			</div>
+			<div class="py-2 form-inline">
+				<span class="d-inline-block" style="width: 100px;">제 목: </span>
+				<input type="text" name="title" class="form-control">
+			</div>
+			<div class="py-2">
+				<textarea name="content" class="form-control"></textarea>
+			</div>
+			<div class="text-center py-2">
+				<button class="btn btn-primary" type="button" id="btSave">저장</button>
+				<button class="btn btn-danger" type="reset">다시작성</button>
+			</div>
+		</form>
 		<table class="table table-bordered my-3" id="listTb">
 			<thead>
 				<tr>
@@ -22,6 +40,7 @@
 					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 			<tbody>
