@@ -69,6 +69,34 @@ app.get("/pug/delete/:id", async (req, res) => {
 	}
 });
 
+app.get("/pug/update/:id", async (req, res) => {
+	const vals = {
+		title: "게시글 수정",
+	}
+	const id = req.params.id;
+	const sql = "SELECT * FROM board WHERE id="+id;
+	const connect = await pool.getConnection();
+	const result = await connect.query(sql);
+	vals.data = result[0][0];
+	res.render("update.pug", vals);
+});
+
+app.post("/pug/update", async (req, res) => {
+	const sqlVals = [];
+	sqlVals.push(req.body.title);
+	sqlVals.push(req.body.content);
+	sqlVals.push(req.body.id);
+	const sql = "UPDATE board SET title=?, content=? WHERE id=?";
+	const connect = await pool.getConnection();
+	const result = await connect.query(sql, sqlVals);
+	if(result[0].changedRows == 1) {
+		res.redirect("/pug");
+	}
+	else {
+		res.send("수정에 실패하였습니다.");
+	}
+});
+
 /*
 app.get("/sqltest", (req, res) => {
 	let connect = conn.getConnection((err, connect) => {

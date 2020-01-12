@@ -20,8 +20,15 @@ SELECT id, title.. FROM board ORDER BY id DESC;
 SELECT * FROM board WHERE id=4;
 ~~~
 
+## Update
+~~~sql
+-- UPDATE 테이블명 SET 필드명='값', 필드명='값'... WHERE id=4;
+UPDATE board SET title='제목', content='내용' WHERE id=4;
+~~~
+
 ## Delete
 ~~~sql
 -- DELETE, UPDATE WHERE절을 꼭! 구현하자
 -- DELETE FROM board WHERE id=4;
 ~~~
+
