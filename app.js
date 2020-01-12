@@ -56,6 +56,19 @@ app.get("/pug/view/:id", async (req, res) => {
 	res.render("view.pug", vals);
 });
 
+app.get("/pug/delete/:id", async (req, res) => {
+	let id = req.params.id;
+	let sql = "DELETE FROM board WHERE id="+id;
+	const connect = await pool.getConnection();
+	const result = await connect.query(sql);
+	if(result[0].affectedRows == 1) {
+		res.redirect("/pug");
+	}
+	else {
+		res.send("삭제에 실패하였습니다.");
+	}
+});
+
 /*
 app.get("/sqltest", (req, res) => {
 	let connect = conn.getConnection((err, connect) => {

@@ -1,0 +1,16 @@
+extends ./layout/board.pug
+block title
+	.jumbotron.my-2
+		h2= title
+			small - 게시글 수정입니다.
+block content
+	form(method="post" name="updateForm" action="/pug/update" onsubmit="return upData();")
+		input(type="hidden" name="id" value=`${data.id}`)
+		.p-3
+			input.form-control(type="text" name="title" value=`${data.title}`)
+		.p-3.my-3
+			textarea.form-control(name="content")= data.content
+		.p-3.text-center
+			button.btn.btn-primary#btSave 저장
+			button.btn.btn-danger(type="reset") 다시작성
+			button.btn.btn-success#btList(type="button") 리스트

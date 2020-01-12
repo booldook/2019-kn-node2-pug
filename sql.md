@@ -19,3 +19,9 @@ SELECT id, title.. FROM board ORDER BY id DESC;
 -- SELECT * FROM board WHERE title LIKE '%노드%';
 SELECT * FROM board WHERE id=4;
 ~~~
+
+## Delete
+~~~sql
+-- DELETE, UPDATE WHERE절을 꼭! 구현하자
+-- DELETE FROM board WHERE id=4;
+~~~
