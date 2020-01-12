@@ -33,7 +33,13 @@ router.post("/post", async (req, res) => {
 	connect.release();
 	res.json(result[0]);
 });
-//router.delete();
+router.delete("/delete", async (req, res) => {
+	let sql = "DELETE FROM board WHERE id="+req.body.id;
+	let connect = await pool.getConnection();
+	let result = await connect.query(sql);
+	connect.release();
+	res.json(result[0]);
+});
 //router.put();
 
 module.exports = router;
