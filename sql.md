@@ -15,4 +15,7 @@ INSERT INTO board SET title='제목입니다.', writer='관리자', wdate='2020-
 SELECT * FROM board ORDER BY id DESC;
 -- SELECT 필드명1, 필드명2 FROM board ORDER BY id DESC;
 SELECT id, title.. FROM board ORDER BY id DESC;
+-- SELECT * FROM board WHERE id = 4;
+-- SELECT * FROM board WHERE title LIKE '%노드%';
+SELECT * FROM board WHERE id=4;
 ~~~

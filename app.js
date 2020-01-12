@@ -43,6 +43,19 @@ app.get(["/pug", "/pug/:page"], async (req, res) => {
 			break;
 	}
 });
+
+app.get("/pug/view/:id", async (req, res) => {
+	let vals = {
+		title: "게시글 상세 보기",
+	}
+	let id = req.params.id;
+	let sql = "SELECT * FROM board WHERE id="+id;
+	const connect = await pool.getConnection();
+	const result = await connect.query(sql);
+	vals.data = result[0][0];
+	res.render("view.pug", vals);
+});
+
 /*
 app.get("/sqltest", (req, res) => {
 	let connect = conn.getConnection((err, connect) => {
