@@ -12,7 +12,7 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 app.use('/', express.static('./public'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.locals.pretty = true;
 
 app.get(["/pug", "/pug/:page"], async (req, res) => {
@@ -66,7 +66,7 @@ app.get("/sqltest", (req, res) => {
 */
 
 app.get("/sqltest", async (req, res) => {
-	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?";
+	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?, content=?";
 	let sqlVals = ["제목입니다2.", "관리자2", "2020-01-05 15:55:00"];
 	const connect = await pool.getConnection();
 	const result = await connect.query(sql, sqlVals);
@@ -75,8 +75,8 @@ app.get("/sqltest", async (req, res) => {
 });
 
 app.post("/board", async (req, res) => {
-	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?";
-	let val = [req.body.title, req.body.writer, new Date()];
+	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?, content=?";
+	let val = [req.body.title, req.body.writer, new Date(), req.body.content];
 	const connect = await pool.getConnection();
 	const result = await connect.query(sql, val);
 	connect.release();
