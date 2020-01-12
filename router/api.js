@@ -40,6 +40,17 @@ router.delete("/delete", async (req, res) => {
 	connect.release();
 	res.json(result[0]);
 });
-//router.put();
+router.put("/put", async (req, res) => {
+	let id = req.body.id;
+	let title = req.body.title;
+	let content = req.body.content;
+	let writer = req.body.writer;
+	let sql = "UPDATE board SET title=?, content=?, writer=? WHERE id=?";
+	let sqlVals = [title, content, writer, id];
+	let connect = await pool.getConnection();
+	let result = await connect.query(sql, sqlVals);
+	connect.release();
+	res.json(result[0]);
+});
 
 module.exports = router;
