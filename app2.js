@@ -16,14 +16,6 @@ app.locals.pretty = true;
 
 /* Router */
 const pugRouter = require("./router/pug");
+const apiRouter = require("./router/api");
 app.use("/pug", pugRouter);
-
-
-app.get("/sqltest", async (req, res) => {
-	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?, content=?";
-	let sqlVals = ["제목입니다2.", "관리자2", "2020-01-05 15:55:00"];
-	const connect = await pool.getConnection();
-	const result = await connect.query(sql, sqlVals);
-	connect.release();
-	res.json(result);
-});
+app.use("/api", apiRouter);

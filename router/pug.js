@@ -43,7 +43,7 @@ router.get("/view/:id", async (req, res) => {
 	res.render("view.pug", vals);
 });
 
-router.get("/pug/delete/:id", async (req, res) => {
+router.get("/delete/:id", async (req, res) => {
 	let id = req.params.id;
 	let sql = "DELETE FROM board WHERE id="+id;
 	const connect = await pool.getConnection();
