@@ -33,3 +33,4 @@ const pugRouter = require(path.join(__dirname, "./router/pug"));
 const apiRouter = require(path.join(__dirname, "./router/api"));
 app.use("/pug", pugRouter);
 app.use("/api", apiRouter);
+

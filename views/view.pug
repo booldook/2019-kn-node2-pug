@@ -9,10 +9,10 @@ block content
 	.border.border-primary.rounded.p-3.my-3= data.content
 	if data.fileChk == "img"
 		.border.border-primary.rounded.p-3.my-3
-			img(src=`${data.filepath}`)
+			img.mw-100(src=`${data.filepath}`)
 	else if data.fileChk == "file"
 		.border.border-primary.rounded.p-3.my-3
-			a(href=`/download/${data.filepath}`)
+			a(href=`/pug/download/${data.id}`)= data.orifile
 
 	.p-3.text-center
 		button.btn.btn-primary#btUpdate(data-id=`${data.id}`) 수정

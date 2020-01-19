@@ -124,4 +124,14 @@ router.post("/create", upload.single("upfile"), async (req, res) => {
 	res.redirect("/pug");
 });
 
+router.get("/download/:id", async (req, res) => {
+	let id = req.params.id;
+	let sql = "SELECT realfile, orifile FROM board WHERE id="+id;
+	const connect = await pool.getConnection();
+	const result = await connect.query(sql);
+	let filepath = path.join(__dirname, "../uploads/"+result[0][0].realfile.split("-")[0]);
+	let file = filepath + "/" + result[0][0].realfile;
+	res.download(file, result[0][0].orifile);
+});
+
 module.exports = router;
