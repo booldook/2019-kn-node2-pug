@@ -18,6 +18,8 @@ block content
 					td= list.id
 					td
 						a(href=`/pug/view/${list.id}`)= list.title
+							if list.fileIcon
+								i.fa.fa-file.ml-3
 					td= list.writer
 					td= list.wdate
 					td= list.rnum

@@ -21,6 +21,9 @@ router.get(["/", "/:page"], async (req, res) => {
 			const connect = await pool.getConnection();
 			const result = await connect.query(sql);
 			connect.release();
+			for(let v of result[0]) {
+				if(v.realfile) v.fileIcon = true;
+			}
 			vals.lists = result[0];
 			res.render("list.pug", vals);
 			break;
@@ -96,8 +99,14 @@ router.post("/update", async (req, res) => {
 
 router.post("/create", upload.single("upfile"), async (req, res) => {
 	console.log(req.fileUploadChk);
+	let oriFile = ''; 
+	let realFile = '';
+	if(req.file) {
+		oriFile = req.file.originalname;
+		realFile = req.file.filename;
+	}
 	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?, content=?, orifile=?, realfile=?";
-	let val = [req.body.title, req.body.writer, new Date(), req.body.content, req.file.originalname, req.file.filename];
+	let val = [req.body.title, req.body.writer, new Date(), req.body.content, oriFile, realFile];
 	const connect = await pool.getConnection();
 	const result = await connect.query(sql, val);
 	connect.release();
