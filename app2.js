@@ -32,6 +32,8 @@ app.use(methodOverride((req, res) => {
 /* Router */
 const pugRouter = require(path.join(__dirname, "./router/pug"));
 const apiRouter = require(path.join(__dirname, "./router/api"));
+const userRouter = require(path.join(__dirname, "./router/user"));
 app.use("/pug", pugRouter);
 app.use("/api", apiRouter);
+app.use("/user", userRouter);
 
