@@ -1,3 +1,9 @@
+/*
+1. npm i multer
+2. var storage = multer.storage({destinationCb, filenameCb});
+3. var upload = multer({storage});
+4. app.post("경로", upload.single("파일필드명"), (req, res) => {})
+*/
 const multer = require('multer');
 const path = require('path'); 		// node.js 기본 객체
 const fs = require('fs'); 				// node.js 기본 객체
@@ -11,7 +17,7 @@ const destination = (req, file, cb) => {
 }
 
 const filename = (req, file, cb) => {
-	cb(null, getFile(file.originalname).newName);
+	cb(null, getFile(file.originalname));
 }
 
 const storage = multer.diskStorage({ destination, filename });
@@ -28,7 +34,7 @@ function getPath() {
 function makePath() {
 	let d = new Date();
 	let year = d.getFullYear(); //2020
-	let month = d.getMonth();		//
+	let month = d.getMonth();		//01
 	return String(year).substr(2) + zp(month+1);
 }
 
@@ -42,11 +48,7 @@ function getFile(oriFile) {
 	let f1 = makePath();	//2001
 	let f2 = Date.now();	//timestamp
 	let f3 = Math.floor(Math.random() * 90) + 10;	//10 ~ 99
-	return {
-		newName: f1 + "-" + f2 + "-" + f3 + ext,
-		newExt: ext,
-		newFile: f1 + "-" + f2 + "-" + f3
-	}
+	return f1 + "-" + f2 + "-" + f3 + ext;
 }
 
 module.exports = {upload};
