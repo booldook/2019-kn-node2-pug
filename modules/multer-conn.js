@@ -20,8 +20,21 @@ const filename = (req, file, cb) => {
 	cb(null, getFile(file.originalname));
 }
 
+const fileFilter = (req, file, cb) => {
+	let allowExt = ['.jpg', '.jpeg', '.gif', '.png', '.zip', '.txt', '.pdf'];
+	let ext = path.extname(file.originalname).toLocaleLowerCase();
+	if(allowExt.indexOf(ext) > -1) {
+		req.fileUploadChk = true;
+		cb(null, true);
+	}
+	else {
+		req.fileUploadChk = false;
+		cb(null, false);
+	}
+}
+
 const storage = multer.diskStorage({ destination, filename });
-const upload = multer({storage});
+const upload = multer({storage, fileFilter});
 
 function getPath() {
 	let newPath = path.join(__dirname, "../uploads/"+makePath());

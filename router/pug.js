@@ -95,6 +95,7 @@ router.post("/update", async (req, res) => {
 });
 
 router.post("/create", upload.single("upfile"), async (req, res) => {
+	console.log(req.fileUploadChk);
 	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?, content=?, orifile=?, realfile=?";
 	let val = [req.body.title, req.body.writer, new Date(), req.body.content, req.file.originalname, req.file.filename];
 	const connect = await pool.getConnection();
