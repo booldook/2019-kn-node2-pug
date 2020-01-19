@@ -50,6 +50,17 @@ router.get("/view/:id", async (req, res) => {
 	result = await connect.query(sql);
 	connect.release();
 	vals.data = result[0][0];
+	if(vals.data.realfile) {
+		let file = vals.data.realfile.split("-");
+		let filepath = "/uploads/"+file[0]+"/"+vals.data.realfile;
+		vals.data.filepath = filepath;
+		let img = ['.jpg', '.jpeg', '.png', '.gif'];
+		let ext = path.extname(vals.data.realfile).toLowerCase();
+		if(img.indexOf(ext) > -1) vals.data.fileChk = "img";
+		else vals.data.fileChk = "file";
+	}
+	else vals.data.fileChk = "";
+	//res.json(vals);
 	res.render("view.pug", vals);
 });
 
