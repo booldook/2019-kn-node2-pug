@@ -1,5 +1,7 @@
 const express = require('express');
+const path = require('path');
 const methodOverride = require('method-override');
+const multer = require(path.join(__dirname, './modules/multer-conn'));
 const app = express();
 const port = 3000;
 const host = '127.0.0.1';
@@ -9,8 +11,9 @@ app.listen(port, () => {
 });
 
 app.set('view engine', 'pug');
-app.set('views', './views');
-app.use('/', express.static('./public'));
+app.set('views', path.join(__dirname, './views'));
+app.use('/', express.static(path.join(__dirname, './public')));
+app.use('/uploads', express.static(path.join(__dirname, './uploads')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.locals.pretty = true;
@@ -27,7 +30,7 @@ app.use(methodOverride((req, res) => {
 
 
 /* Router */
-const pugRouter = require("./router/pug");
-const apiRouter = require("./router/api");
+const pugRouter = require(path.join(__dirname, "./router/pug"));
+const apiRouter = require(path.join(__dirname, "./router/api"));
 app.use("/pug", pugRouter);
 app.use("/api", apiRouter);

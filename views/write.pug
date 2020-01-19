@@ -4,7 +4,7 @@ block title
 		h2= title
 			small - 게시글 작성 입니다.
 block content
-	form(action="/pug/create" method="post" name="writeForm")
+	form(action="/pug/create" method="post" name="writeForm" enctype="multipart/form-data")
 		table.table.table-bordered
 			tbody
 				tr
