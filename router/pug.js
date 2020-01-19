@@ -36,6 +36,7 @@ router.get("/view/:id", async (req, res) => {
 	let vals = {
 		title: "게시글 상세 보기",
 	}
+	// console.log(req.ip);
 	let id = req.params.id;
 	const connect = await pool.getConnection();
 	let sql = "UPDATE board SET rnum = rnum + 1 WHERE id="+id;
