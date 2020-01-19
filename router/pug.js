@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { pool, sqlErr } = require('../modules/mysql-conn');
+const path = require('path');
+const { pool, sqlErr } = require(path.join(__dirname, '../modules/mysql-conn'));
+const { upload } = require(path.join(__dirname, '../modules/multer-conn'));
 
 /*
 /pug/update/4 <- 요청처리시
@@ -92,7 +94,7 @@ router.post("/update", async (req, res) => {
 	}
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", upload.single("upfile"), async (req, res) => {
 	let sql = "INSERT INTO board SET title=?, writer=?, wdate=?, content=?";
 	let val = [req.body.title, req.body.writer, new Date(), req.body.content];
 	const connect = await pool.getConnection();

@@ -11,20 +11,25 @@ const destination = (req, file, cb) => {
 }
 
 const filename = (req, file, cb) => {
-	cb(null, getFile(file.fieldname).newName);
+	cb(null, getFile(file.originalname).newName);
 }
 
 const storage = multer.diskStorage({ destination, filename });
+const upload = multer({storage});
 
 function getPath() {
 	let newPath = path.join(__dirname, "../uploads/"+makePath());
+	if(!fs.existsSync(newPath)) {
+		fs.mkdirSync(newPath);
+	}
+	return newPath;
 }
 
 function makePath() {
 	let d = new Date();
 	let year = d.getFullYear(); //2020
 	let month = d.getMonth();		//
-	return year.substr(2) + zp(month+1);
+	return String(year).substr(2) + zp(month+1);
 }
 
 function zp(d) {
@@ -44,3 +49,4 @@ function getFile(oriFile) {
 	}
 }
 
+module.exports = {upload};

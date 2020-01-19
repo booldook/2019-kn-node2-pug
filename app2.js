@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const methodOverride = require('method-override');
-const multer = require(path.join(__dirname, './modules/multer-conn'));
 const app = express();
 const port = 3000;
 const host = '127.0.0.1';
