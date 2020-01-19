@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const datetime = require('date-time');
 const path = require('path');
 const { pool, sqlErr } = require(path.join(__dirname, '../modules/mysql-conn'));
 const { upload } = require(path.join(__dirname, '../modules/multer-conn'));
@@ -24,7 +25,11 @@ router.get(["/", "/:page"], async (req, res) => {
 			for(let v of result[0]) {
 				if(v.realfile) v.fileIcon = true;
 			}
-			vals.lists = result[0];
+			const resultData = result[0].map((v) => {
+				v.wdate = datetime(v.wdate);
+				return v;
+			});
+			vals.lists = resultData;
 			res.render("list.pug", vals);
 			break;
 		case "write":

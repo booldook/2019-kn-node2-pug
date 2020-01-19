@@ -4,6 +4,7 @@ const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 const host = '127.0.0.1';
+const User = require(path.join(__dirname, "./models/User"));
 
 app.listen(port, () => {
 	console.log(`http://${host}:${port}`);
