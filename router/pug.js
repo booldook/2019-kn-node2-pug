@@ -37,9 +37,11 @@ router.get("/view/:id", async (req, res) => {
 		title: "게시글 상세 보기",
 	}
 	let id = req.params.id;
-	let sql = "SELECT * FROM board WHERE id="+id;
 	const connect = await pool.getConnection();
-	const result = await connect.query(sql);
+	let sql = "UPDATE board SET rnum = rnum + 1 WHERE id="+id;
+	let result = await connect.query(sql);
+	sql = "SELECT * FROM board WHERE id="+id;
+	result = await connect.query(sql);
 	connect.release();
 	vals.data = result[0][0];
 	res.render("view.pug", vals);

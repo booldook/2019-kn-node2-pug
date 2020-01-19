@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "supervisor app",
-    "start": "node app",
-    "build": "pm2 start app"
+    "dev": "supervisor app2",
+    "start": "node app2",
+    "build": "pm2 start app2"
   },
   "keywords": [],
   "author": "",

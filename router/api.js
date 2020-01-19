@@ -9,7 +9,7 @@ put: Update/Update
 delete: Delete/Delete
 */
 
-router.get(["/get", "/get/:id"], async (req, res) => {
+router.get(["/", "/get", "/get/:id"], async (req, res) => {
 	let sql = '';
 	const vals = {	title: "API 게시판"	};
 	if(req.params.id) sql = "SELECT * FROM board WHERE id="+req.params.id;
