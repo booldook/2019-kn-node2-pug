@@ -26,7 +26,7 @@ router.get(["/", "/:page"], async (req, res) => {
 				if(v.realfile) v.fileIcon = true;
 			}
 			const resultData = result[0].map((v) => {
-				v.wdate = datetime(v.wdate);
+				v.wdate = datetime({date: v.wdate});
 				return v;
 			});
 			vals.lists = resultData;
